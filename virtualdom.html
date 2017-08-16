@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./Element.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var hello = el("div",{},[
+				el("input",{type:"text",value:"hello world"}),
+				el("div",{},[el("input",{type:"text",value:"hello world"}),"nihao"])
+			]);
+			document.body.append(hello.render());
+		</script>
+	</body>
+</html>
