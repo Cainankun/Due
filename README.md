@@ -1,2 +1,2 @@
-# virtualDom
-A lightweight virtual dom library.
+# Due
+A framework imitate Vue.
