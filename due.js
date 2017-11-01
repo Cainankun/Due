@@ -78,12 +78,6 @@ var _array = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var a = [];
-a.__proto__ = _array.dueArray;
-a.push(2);
-a.push(3);
-console.log(Array.isArray);
-
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {

@@ -1,0 +1,26 @@
+{
+  "name": "due",
+  "version": "1.0.0",
+  "description": "A framework imitate Vue.",
+  "main": "due.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config webpack.config.js -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cainankun/Due.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cainankun/Due/issues"
+  },
+  "homepage": "https://github.com/Cainankun/Due#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-latest": "^6.24.1",
+    "webpack": "^3.8.1"
+  }
+}

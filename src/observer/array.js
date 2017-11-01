@@ -1,4 +1,4 @@
-export let dueArray = [];
+export const dueArray = [];
 const arrayMethod = ["push","pop","shift","unshift","reserve","splice"];
 const origin = Array.prototype;
 arrayMethod.forEach(function(method){
