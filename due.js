@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,11 +70,33 @@
 "use strict";
 
 
-var _observer = __webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = Directive;
+function Directive(el, expression) {
+	this.el = el;
+	this.expression = expression;
+}
+Directive.prototype.update = function (newValue) {
+	var pattern = new RegExp(this.expression, "gm");
+	this.el.nodeValue = this.el.nodeValue.replace(pattern, newValue);
+	this.expression = newValue;
+	console.log(this.expression);
+};
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _observer = __webpack_require__(2);
 
 var _observer2 = _interopRequireDefault(_observer);
 
-var _collectDep = __webpack_require__(4);
+var _collectDep = __webpack_require__(5);
 
 var _collectDep2 = _interopRequireDefault(_collectDep);
 
@@ -105,7 +127,7 @@ var app = new Due({
 window.app = app;
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -119,9 +141,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
-var _subj = __webpack_require__(6);
+var _subj = __webpack_require__(4);
 
 var _subj2 = _interopRequireDefault(_subj);
 
@@ -159,7 +181,7 @@ var Observer = function () {
 exports.default = Observer;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -181,8 +203,59 @@ var convert = exports.convert = function convert(obj, key, value) {
 };
 
 /***/ }),
-/* 3 */,
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _directive = __webpack_require__(0);
+
+var _directive2 = _interopRequireDefault(_directive);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var _class = function () {
+	function _class() {
+		_classCallCheck(this, _class);
+	}
+
+	_createClass(_class, [{
+		key: "publish",
+		value: function publish(key, value) {
+			if (this[key] instanceof Array) {
+				this[key].forEach(function (directive) {
+					directive instanceof _directive2.default && directive.update(value);
+				});
+			}
+		}
+	}, {
+		key: "add",
+		value: function add(key, directive) {
+			if (this[key] instanceof Array) {
+				this[key].push(directive);
+			} else {
+				this[key] = [];
+				this[key].push(directive);
+			}
+		}
+	}]);
+
+	return _class;
+}();
+
+exports.default = _class;
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -193,7 +266,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = walkDom;
 
-var _directive = __webpack_require__(5);
+var _directive = __webpack_require__(0);
 
 var _directive2 = _interopRequireDefault(_directive);
 
@@ -237,80 +310,6 @@ function walkDom(node, data) {
 		});
 	}
 }
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = Directive;
-function Directive(el, expression) {
-	this.el = el;
-	this.expression = expression;
-}
-Directive.prototype.update = function (newValue) {
-	var pattern = new RegExp(this.expression, "gm");
-	this.el.nodeValue = this.el.nodeValue.replace(pattern, newValue);
-	this.expression = newValue;
-	console.log(this.expression);
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _directive = __webpack_require__(5);
-
-var _directive2 = _interopRequireDefault(_directive);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var _class = function () {
-	function _class() {
-		_classCallCheck(this, _class);
-	}
-
-	_createClass(_class, [{
-		key: "publish",
-		value: function publish(key, value) {
-			if (this[key] instanceof Array) {
-				this[key].forEach(function (directive) {
-					directive instanceof _directive2.default && directive.update(value);
-				});
-			}
-		}
-	}, {
-		key: "add",
-		value: function add(key, directive) {
-			if (this[key] instanceof Array) {
-				this[key].push(directive);
-			} else {
-				this[key] = [];
-				this[key].push(directive);
-			}
-		}
-	}]);
-
-	return _class;
-}();
-
-exports.default = _class;
 
 /***/ })
 /******/ ]);
